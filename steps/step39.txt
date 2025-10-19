@@ -1,0 +1,15 @@
+Now lets open POSTMAN > create new wrokspace > new > HTTP request > POST and enter the "http://localhost:5001/api/transactions".
+
+Then in Body > raw > enter the object with the data to be sent by the user there -
+{
+    "user_id": "123",
+    "title": "Vijaylakshmi",
+    "category": "food",
+    "amount": 280
+}
+
+Send it and see the response back thus there ; also in console log we can see its an array of object : [{...}] ; thats why we sent only the 0th index as response there using [0] and not the whole array at once there.
+
+Can even go on neon's dashboard > refresh and see the row got created there as well too.
+
+See the next steps in server.js file now there.

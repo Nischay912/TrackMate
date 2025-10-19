@@ -8,6 +8,11 @@ dotenv.config()
 
 const app = express()
 
+// step30: to use the req.body , we need to have the body-parser middleware thus here below.
+
+// step31: this is a built-in middleware ; "middleware" is a function that runs in the middle between the request and the response ; so th ebelow middleware runs before we use the req.body there below ; and this reads incoming requests and then : Converts the JSON data into a JavaScript object and attaches it to req.body ; Without it, req.body would be undefined for JSON requests ; it thus : Makes it easy to access data sent from clients (e.g., POST requests with JSON payloads) ; thus here below.
+app.use(express.json())
+
 // step11: lets define the PORT from environment variables here below ; and just incase due to some error its undefined we can hardcode it to 5001 here below ; so that the app doesn't crash thus here below.
 
 // step12: see the next steps in step13.txt file now there.
@@ -53,8 +58,51 @@ async function initDB() {
 // step6: can go on "localhost:5001/" to see the "Hello World" message here below.
 
 // step7: see the next steps in step8.txt file now there.
-app.get("/", (req, res) => {
-    res.send("Hello World")
+// app.get("/", (req, res) => {
+//     res.send("Hello World")
+// })
+
+// step28: now lets create a route for sending POST request to the "/api/transactions" enpoint here below.
+app.post("/api/transactions", async (req, res) => {
+    try{
+        // step29: we will destructure the object sent by user through req.body and get it here below.
+        const { title, amount, category, user_id } = req.body
+
+        // step32: now lets check if there is no title or category or user_id sent by user OR if the amount entered is undefined as it may be 0 but should not be undefined ; then we will send a respone back thus here below.
+        if(!title || !category || !user_id || amount === undefined){
+            return res.status(400).json({
+                message: "All fields are required!"
+            })
+        }
+
+        // step33: now once we got all the required fields, we will insert the transaction into the database here below.
+
+        // step34: no need to add the "created_at" field now as it is automatically added by the database thus here below ; with its default value that we mentioned there earlier i.e. the current timestamp thus here below.
+
+        // step35: RETURNING * is a PostgreSQL feature that tells the database that : After inserting, return the full row that was just added ; "*" means return all the columns and store it in the "transaction" variable thus here below.
+        const transaction = await sql`
+            INSERT INTO transactions (user_id, title, amount, category) 
+            VALUES (${user_id}, ${title}, ${amount}, ${category})
+            RETURNING *
+        `
+
+        // step36: can console log for debugging purposes ; there we see that transaction now is an array of objects ; but we want only the first object of the array thus here below ; so we will send only the 0th index of it in the response back thus here below.
+        // console.log(transaction)
+        // console.log(transaction[0])
+
+        // step37: now lets send a 201 status code response which means something was created thus here below.
+
+        // step38: see the next steps in step39.txt file now there.
+        res.status(201).json(
+            transaction[0]
+        )
+    }
+    catch(error){
+        console.error("Error creating transaction:", error)
+        res.status(500).json({
+            message: "Error creating transaction due to Internal Server Error"
+        })
+    }
 })
 
 // step25: now lets initialize the database and then run the app.listen function only after the database is initialized successfully thus here below ; else it will exit with process.exit there using the error message thus here below.
