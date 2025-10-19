@@ -1,0 +1,7 @@
+Now, lets connect to our database "Postgres" provided by "neon".
+
+Go on "neon.tech" > login using Github > new project > name it > press "create".
+
+On the dashboard > click on "connect" > copy the connection string > paste in .env file
+
+See the next steps in db.js file now there.

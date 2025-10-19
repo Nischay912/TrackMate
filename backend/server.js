@@ -3,6 +3,7 @@ import express from "express"
 
 // step10: if we now try to use the environment variables like by doing : "console.log(process.env.PORT)" ; it will show "undefined" because to use the environment variables, we need to use the dotenv package and then run its config function thus here below.
 import dotenv from "dotenv"
+import { sql } from "./config/db.js"
 dotenv.config()
 
 const app = express()
@@ -11,6 +12,41 @@ const app = express()
 
 // step12: see the next steps in step13.txt file now there.
 const PORT = process.env.PORT || 5001
+
+// step18: now lets create a function to initialize the database here below.
+async function initDB() {
+    try{
+        // step19: we will be using RAW SQL codes for database in this project where we have Tables and all, thus here below.
+
+        // step20: creating the table named "transactions" : only created if it doesn’t already exist. This prevents errors if the table already exists.
+
+        // step21: we created the "id" as SERIAL i.e auto-incrementing integer which is common for unique IDs i.e it starts from 1 and increments by 1 automatically thus here below.
+
+        // step22: we have VARCHAR(255) which tells that the column is a string and can hold up to 255 characters ; and NOT NULL which tells that the column is required and cannot be null thus here below.
+
+        // step23: then we have a created_at timestamp which is automatically populated with the current timestamp whenever a new row is inserted into the table thus here below.
+
+        // step24: DECIMAL(10,2) is used to mention : "fixed-point number" with : 10 digits total , 2 digits after the decimal point ; so the maximum it can store is 9999999999.99 (8 digits before the decimal point and 2 digits after) thus here below.
+        await sql`CREATE TABLE IF NOT EXISTS transactions(
+            id SERIAL PRIMARY KEY, 
+            user_id VARCHAR(255) NOT NULL,
+            title VARCHAR(255) NOT NULL,
+            amount DECIMAL(10, 2) NOT NULL,
+            category VARCHAR(255) NOT NULL,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )`
+
+        console.log("Database initialized successfully!")
+    }
+    catch(error){
+        console.error("Error initializing database:", error)
+
+        // step25: we exit the process with status code "1" which is for failure ("0" for success) ; exitting from process will kill the server and prevent it from running further; its used to : stop the server completely instead of running it in a broken state. thus here below.
+
+        // step26: see the next steps in step27.txt file now there.
+        process.exit(1)
+    }
+}
 
 // step5: now lets create a route here below for the url ending in "/" here below.
 
@@ -21,9 +57,14 @@ app.get("/", (req, res) => {
     res.send("Hello World")
 })
 
-app.listen(PORT, () => {
-    // step3: now we can make this to do the following console log when the server is running here below.
+// step25: now lets initialize the database and then run the app.listen function only after the database is initialized successfully thus here below ; else it will exit with process.exit there using the error message thus here below.
 
-    // step4: can check it by running : node server.js in console now here below.
-    console.log(`Server is running on port ${PORT} : http://localhost:${PORT}`)
+// step26: now we can see the message of "Database initialized successfully!" in console now there and on neon.tech's dashboard ; we can see the table's structure under "tables" section on the dashboard there now.
+initDB().then(() => {
+    app.listen(PORT, () => {
+        // step3: now we can make this to do the following console log when the server is running here below.
+
+        // step4: can check it by running : node server.js in console now here below.
+        console.log(`Server is running on port ${PORT} : http://localhost:${PORT}`)
+    })
 })
