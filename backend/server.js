@@ -62,6 +62,39 @@ async function initDB() {
 //     res.send("Hello World")
 // })
 
+// step40: now lets make a GET request to fetch the transaction using the user_id here below.
+
+// step41: we will have the user_id dynamic in the URL, so we will use a dynamic route here below using ":" thus here below ; example : "localhost:5001/api/transactions/123" ; where "123" is the user_id thus here below.
+app.get("/api/transactions/:userId", async (req, res) => {
+    try{
+        console.log(req.params)
+        // step42: we will get the user_id from the URL here below, using the params object thus here below ; "params" contains the parameters of the URL thus here below , like if we have "localhost:5001/api/transactions/123" then the "123" will be the "user_id" thus here below and so on....
+        const { userId } = req.params;
+
+        // step43: we will now select all the columns from the transactions table we stored in "transactions" variable, for the user_id that we got from the URL thus here below.
+
+        // step44: we will have ORDER BY DESC so that the latest transaction will come first in the list there, thus here below.
+
+        // step45: now we store the result in "transactions" variable thus here below which will be an array of objects thus here below.
+        const transactions = await sql`
+            SELECT * FROM transactions WHERE user_id = ${userId} ORDER BY created_at DESC
+        `
+
+        // step46: so we send back the transactions we got from above thus here below.
+
+        // step47: we can test it by sending a GET request for a userId on POSTMAN to "http://localhost:5001/api/transactions/123" ; where "123" is the user_id thus here below.
+
+        // step48: we will thus there get the array of objects containing all the transactions of the user with that user_id ; thus here below.
+        res.status(200).json(transactions)
+    }
+    catch(error){
+        console.error("Error fetching transactions:", error)
+        res.status(500).json({
+            message: "Error fetching transactions due to Internal Server Error"
+        })
+    }
+})
+
 // step28: now lets create a route for sending POST request to the "/api/transactions" enpoint here below.
 app.post("/api/transactions", async (req, res) => {
     try{
@@ -102,6 +135,111 @@ app.post("/api/transactions", async (req, res) => {
         res.status(500).json({
             message: "Error creating transaction due to Internal Server Error"
         })
+    }
+})
+
+// step49: now lets make another route for DELETE , to delete a transaction using the transaction id thus here below.
+
+// step50: so we get the transaction id dynamically from the URL here below ; and then delete the transaction with that id thus here below.
+app.delete("/api/transactions/:id", async(req, res) => {
+    try{
+        // step51: lets get the id of the transaction from the URL which is stored as { } object in the req.params thus here below.
+        const { id } = req.params;
+
+        // step60: now we can add the "if" check here below to check if the id is a number or not , thus here below.
+
+        // step61: we use isNaN which is used to check if its NaN (Not a Number) or not thus here below ; like if its not a number it will return true thus here below.
+
+        // step62: like if we have : isNaN("abc") ; it will return "true" thus here below ; and if we have : isNaN(123) ; it will return "false" thus here below.
+
+        // step63: but we put Number inside it too for safety check because if : we have "123" both isNaN and isNaN(Number()) will make it "false" as its a number , but check was for NaN i.e. for not a number ; but if we have : isNaN("123abc") > we will use the Number first which checks if its a Number or not , if not it returns NaN and thus the condition becomes true and sends an erro response instead of crashing the entire app thus here below.
+        if(isNaN(Number(id))){
+            return res.status(400).json({
+                message: "Invalid transaction id!"
+            })
+        }
+
+        // step52: now lets write the query to delete the transaction with the id thus here below.
+
+        // step53: and we use RETURNING * to return all the columns of the deleted transaction thus here below.
+        const result = await sql`
+            DELETE FROM transactions WHERE id = ${id}
+            RETURNING *
+        `
+
+        // step54: now if the result array is empty it means that there was no transaction with that id , as nothing got deleted from there, thus here below.
+        if(result.length === 0){
+
+            // step55: we use status code 404 here which is used for "Not Found" thus here below.
+            return res.status(404).json({
+                message: "Transaction not found!"
+            })
+        }
+
+        // step56: else if there is a transaction with that id, we send back the deleted transaction thus here below.
+
+        // step57: can now use POSTMAN to check it there for any "id" of transaction like : "localhost:5001/api/transactions/1" ; where "1" is the transaction id, thus here below and so on....
+
+        // step58: see the next steps in step59.txt file now there.
+        res.status(200).json("Transaction deleted successfully!")
+    }
+    catch(error){
+        console.error("Error deleting transaction:", error)
+        res.status(500).json({
+            message: "Error deleting transaction due to Internal Server Error"
+        })
+    }
+})
+
+// step64: now lets make an endpoint to get the summary of transactions till now thus here below.
+
+// step65: again we use dynamic route here below using ":" thus here below ; example : "localhost:5001/api/transactions/summary/123" ; where "123" is the user_id thus here below ; so we will get the summary based on the user_id thus here below.
+app.get("/api/transactions/summary/:userId" , async(req, res) => {
+    try {
+        // step66: lets get the user_id from the URL which is stored as { } object in the req.params thus here below.
+        const { userId } = req.params;
+
+        // step67: for summary, first we will get the current balance thus here below.
+
+        // step68: the SUM(amount) will sum up all the amount values for that user with that user_id , and the COALESCE(SUM(amount), 0) will return 0 if there are no transactions initially when its their first login for that user_id thus here below ; it may be undefined initially , so to overcome that we use COALESCE which will make it 0 if the SUM(amount) is undefined thus here below.
+
+        // step69: and so here below we store that value from the SELECT statement below into a column named as "balance" thus here below.
+        const balanceResult = await sql`
+            SELECT COALESCE(SUM(amount), 0) as balance FROM transactions WHERE user_id = ${userId}
+        `
+
+        // step70: similarly lets get the income here below i.e the positive amounts thus here below.
+
+        // step71: we use "amount > 0" so that it adds up only the positive amounts thus here below.
+        const incomeResult = await sql`
+            SELECT COALESCE(SUM(amount), 0) as income FROM transactions 
+            WHERE user_id = ${userId} AND amount > 0
+        `
+
+        // step72: similarly sum up all the negative amounts for the "expenses" thus here below.
+        const expensesResult = await sql`
+            SELECT COALESCE(SUM(amount), 0) as expenses FROM transactions 
+            WHERE user_id = ${userId} AND amount < 0
+        `
+
+        // step73: finally we can send back in response these values thus here below ; we use HTTP status code to 200, meaning “OK” — the request was successful.
+        res.status(200).json({
+
+            // step74: balanceresult will be an array of objects but we want only the first object of it thus here below ; so we will send only the 0th index of it in the response back ; and if the SQL sent back [{ balance: 1200 }] because we had save it as "balance" in the SQL query there ; so now we access it from that object using the key name using the "." operator thus here below.
+
+            // step75: can check it on POSTMAN to get the summary based on the user_id thus here below.
+
+            // step76: see the next steps in step77.txt file now there.
+            balance: balanceResult[0].balance,
+            income: incomeResult[0].income,
+            expenses: expensesResult[0].expenses
+        })
+    } 
+    catch (error) {
+        console.error("Error getting transaction summary:", error)
+        res.status(500).json({
+            message: "Error getting transactions summary due to Internal Server Error"
+        })    
     }
 })
 
