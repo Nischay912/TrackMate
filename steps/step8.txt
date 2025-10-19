@@ -1,0 +1,17 @@
+Express is a web framework which is read-to-use toolbox to build web apps faster and more easily.
+
+Using the web framework : saves time ; makes the code cleaner and more organized ; handles common tasks like routing, error handling, middleware, etc.
+
+So, Express is a already built web framweork for our use ; so instead of creating a new framework , we can use it.
+
+----------------------------------------------------------------------------------------------
+
+API (Application Programming Interface) : allows two different applications to talk to each other.
+
+APIs are all around us ; when we make a mobile payment , we are using an API only , behind the scenes there.
+
+When our FRONTEND part wants to talk to the BACKEND to fetch some data OR send some data ; then we have an API in middle which talks with the Database ; so API helps both of them to talk to each other.
+
+A REST API has many requests that frontend can make to the backend like : GET, POST, PUT, PATCH, DELETE, etc.
+
+See the next steps in step9.txt file now there.

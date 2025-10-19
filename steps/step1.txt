@@ -1,0 +1,11 @@
+We will be having the backend part in "backend" and frontend mobile application part using "React-Native" in the "frontend" part.
+
+We will be building an API in the "backend" folder.
+
+Open terminal using : ctrl + j > cd backend > npm init -y > get the "package.json" file to install the packages there.
+
+"npm i express@4.21.0 dotenv@16.5.0 cors@2.8.5 @neondatabase/serverless@1.0.0"
+
+To use the import version rather than const express = require(....) > visit the "package.json" file and below the keywords there ; type : "type" : "module", > so now we no longer are in the commonJs by default , but in "module" now to use the import/export syntax now.
+
+See the next steps in server.js file now there.

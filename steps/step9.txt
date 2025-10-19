@@ -1,0 +1,11 @@
+Now we whenever we have to see the changes , we need to kill the server using ctrl + c > and then re-run "node server.js".
+
+To avoid this, we can install "npm i -D nodemon" where "-D" means development dependency ; i.e. it won't be there in production as once deployed , no one will be changing server ; so no need to update server there with any change made to it.
+
+This nodemon in development auto restarts the server everytime a change is made to it ; thus now we can see the changes in real-time now there.
+
+So, in package.json add script to run the server.js file with nodemon now instead of node there.
+
+Now, in terminal do : npm run dev > runs that script to run the server.js file using nodemon now > so it watches for changes if any now and restarts the server whenever we save the file after making any changes thus there ; so now no need to manually kill and restart server everytime now here.
+
+See the next steps in server.js file now there.
