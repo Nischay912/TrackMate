@@ -1,0 +1,3 @@
+Now we can go on clerk.com > we can use their various available components for user authentication > create github account > dashboard > create application > name the application > choose any types of authentication you want there below ; we'll be using only the email password combination there > select the email password options there > create app > select "expo" there and copy the env variable and paste it in the .env file now there.
+
+See the next steps in server.js file now there.
