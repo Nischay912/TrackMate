@@ -1,0 +1,9 @@
+Now, we see that if on POSTMAN we enter : http://localhost:5001/api/transactions/dsa i.e. if we enter a string then the app is just crashing there > so lets fix it there first.
+
+If we do : console.log(typeof id); in the try block in the app.delete route ; it gives "string" for both numbers as well as strings in transactions id because anything in URL is always a string only.
+
+But the problem there is that in : DELETE FROM ..... ${id} > now if "id" is a string , app is crashing on POSTMAN too there.
+
+So, we can add a if check before this SQL query there now.
+
+See the next steps there in server.js file now there.
