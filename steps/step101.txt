@@ -1,0 +1,7 @@
+We can test the ratelimiter by going in upstash.js file and make it to "4" requests per minute ; then go on POSTMAN and try to make 5 requests in a minute ; on the 5th request it will throw the "too many requests" error there now.
+
+And then on redis too, under the "Data Browser" section there > we will be able to see the "4" there indicating that we have sent 4 requests and now are rate-limited ; and on top there , we can see our "key" there written too.
+
+For now : it will block the app for all the users because we have used a hardcoded key applicable to all the users ; ut in real-life projects we should use "keys" like "userId" or "ip address" of each user specifically using environment variables or something there ; but we have made this for all users at once as we are just doing for our personal project for learning purposes only here.
+
+See the next steps in step102.txt file now there.
