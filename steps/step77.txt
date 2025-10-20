@@ -1,0 +1,32 @@
+"Rate Limiting" why is it needed ?
+
+If a user starts spamming the refresh page OR spams the insert expenses button there with random expenses randomly there : this will send a lot of requests to the server continuously there ; then the server may become overloaded and the application may break and server may crash if multiple users starts doing so, thus here below.
+
+"Rate Limiting" is a way to control how often someone can do something on a website or application, like how many times they can refresh a page, make a request to an API or try to log in.
+
+We can thus put some limits like : "Only 100 requests per user every 15 minutes"
+
+So, when a user is sending requests to an API, we can in between have a rate limiter to control the number of requests that can be passed, thus here below.
+
+So, if we put rate limiter of 100 requests, then 100 requests will respond successfully on the server , but the 101th request can throw an error like "Too many requests, please try again later".
+
+The status code for this is "429" which means "Too Many requests".
+
+Rate Limiting thus helps with:
+
+- preventing abuse (eg: stopping someone from making 1000 login attempts in 1 minute or so....)
+- protecting servers from getting overwhelmed OR overloaded
+
+Its like a middleware thats present just before the server sends a response back, we check if its safe or not and then send a response accordingly thus there.
+
+And then based on the Rate Limiter, we will send a response back ; i.e. either SUCCESS or it will be FAILED , based on the limit we have put up there.
+
+We can implement this using Redis database OR rate Limiting package as well ; these are provided to us by "UPSTASH".
+
+Go on : upstash.com > login using google "nischaykumar.dev" account as github already being used by ByteShop app there > name the database > choose mumbai region > choose free plan > create.
+
+Get the UPSTASH url for env file and then also get the TOKEN too for the env file there.
+
+Then we copy the codes from documentation and paste in the "upstash.js" file.
+
+So, see the next steps in upstash.js file now there.
