@@ -134,4 +134,12 @@ For that we create a (tabs) folder in "app" folder > and then place all the tabs
 
 -------------------------------------------------------------------------------------------
 
-See the next steps in auth.styles.js file now there.
+Now we have made different CSS files to be available there in different files in assets folder > styles folder there.
+
+We also have made a "colors" file where we have colors of different themes there ; So, now : COLORS.coffee, COLORS.forest, COLORS.purple, COLORS.ocean will give different themes colors based on the theme name in other files wherever we export this COLORS thus there.
+
+in other files : COLORS.background will give the background color of the active theme i.e. if COLORS.coffee is active then COLORS.background will give the background color of coffee theme and so on... thus there.
+
+-------------------------------------------------------------------------------------------
+
+See the next steps in utils.js file now there.
