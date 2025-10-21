@@ -1,0 +1,13 @@
+Now, we can move all the important folder in a "src" folder by creating it in our backend folder, as we usually put all application related things in a "src" folder, as it then later helps in easily deploying the app to production there.
+
+But now the temrinal will crash because in pacakage.json file, we had earlier told there that : nodemon server.js ; but its not the correct path now ; so put there "nodemon src/server.js"
+
+And then add a script more there for production : and now use "node" not "nodemon" because nodmeon will watch the changes happening in development only ; we don't want server to be restarted by changes in the server when deploying the app in production , so use "node" not "nodemon" for production there.
+
+So, add there : "start" : "node src/server.js", in the package.json file there.
+
+So, we will use this script later, when we deploy this API.
+
+Also, we can replace : "main": "index.js" to > "main": "src/server.js" as the starter file is not index.js but server.js in our case there.
+
+See the next steps now in step122.txt file now there.

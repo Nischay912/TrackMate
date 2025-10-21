@@ -1,0 +1,7 @@
+Now : we see that : we can also make the functions written in each route of transactionsRoute.js file to be in a seperate folder called "controllers" that will contain the function for each route there.
+
+So, each route's content we can paste in that file now from there.
+
+Like we first make a function in transactionsController file named as "getTransactionsByUserId and then paste the contents of route "/:userId" into it ; then we can add the function "getTransactionsByUserId" in the transactionsRoute file there instead of the content; so that it means : now : When a GET request comes to /api/transactions/:userId, call the getTransactionsByUserId function there and inside that function we have moved our logic there now.
+
+See the next steps in server.js file now there.
