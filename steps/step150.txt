@@ -1,0 +1,114 @@
+Now as per next step of clerk.com documentation > in terminal do : cd mobile > "npm install expo-secure-store".
+
+Then we can setup the tokenCache in "_layout.jsx" file as per the documentation of clerk.com now there too.
+
+---------------------------------------------------------------------------------------------
+
+Then as per the next steps there : create a folder called (auth) in the "app" folder there > this will be the "group route" folder as its formed using paranthesis in start and the end > and we will have all the authentication screens inside that folder there now.
+
+So, we will keep all the authentication related screens in one place now there like "login, signup, forgot password, etc" there.
+
+Thus it is a folder that groups screens together without adding /auth to the route path ; as if the folder name wa sjust auth ; it would have become a route folder making path as "/auth/log-in" and so on.. there ; but "(auth)" folder means : it just Helps organize code while keeping URLs neat and clean there.
+
+So, we will keep the authentication screens within that folder now.
+
+---------------------------------------------------------------------------------------------
+
+Then we copy paste the code from clerk.com documentation in the _layout.jsx file inside the (auth) folder there now.
+
+NOTE : yes, we can have multiple _layout files , like one we had in "root" directory in the "app" folder ; others can be many in each group or folder like for each group route too OR for other routes folder too , like we have for this (Auth) file there now.
+
+So, lets copy the documentation code there now -
+
+import { Redirect, Stack } from 'expo-router'
+import { useAuth } from '@clerk/clerk-expo'
+
+export default function AuthRoutesLayout() {
+  const { isSignedIn } = useAuth()
+
+  if (isSignedIn) {
+    return <Redirect href={'/'} />
+  }
+
+  return <Stack />
+}
+
+So, this checks basiclaly that a user is signned in or not ; if signned in > they will be directed to '/' i.e. the homepage ; else they will be shown the signup OR the signin page there.
+
+---------------------------------------------------------------------------------------------
+
+Similarly then copy paste the code from documentation in signup and signin files too there.
+
+---------------------------------------------------------------------------------------------
+
+Then as per documentation, create a file name "SignOutButton" in "components" folder and paste the code from documentation there too now.
+
+---------------------------------------------------------------------------------------------
+
+And then finally as per the documentation, we have the index.jsx i.e. the home page there, where the user will see the Hello text and all, if he is signned in , with their user email there.
+
+So, like told there to make a (home) folder first in app there ; lets make a (root) folder instead there and then paste the code from documentation for the index.jsx file now there.
+
+-----------------------------------------------------------------------------------------------
+
+And then since this is now the root index.jsx file , we can delete the index.jsx file that we had in "app" folder there with the content below -
+
+import { Link } from "expo-router";
+import { Text, View } from "react-native";
+
+export default function Index() {
+  return (
+    <View
+      style={{
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "green",
+      }}
+    >
+      <Text style={{color: "yellow"}}>Mera naam hai nischay yaad rakhna</Text>
+      <Link style={{color: "yellow"}} href={"/about"}>About</Link>
+    </View>
+  );
+}
+
+; delete this file as it was for testing purposes only there initially.
+
+-----------------------------------------------------------------------------------------------
+
+FInally, then under the (root) also create a _layout.jsx file there ; and yes : NOTE : yes, we can have multiple _layout files , like one we had in "root" directory in the "app" folder ; others can be many in each group or folder like for each group route too OR for other routes folder too , like we have for this (root) file there now.
+
+So, this  _layout.jsx file will check if the user is signned in or not there ; there we check if user is signned in then we take them to signin page , else take to homepage OR whatever page they are in , keep them there only safely there.
+
+-----------------------------------------------------------------------------------------------
+
+Can run the app using "npx expo" now and see the sign-in page there now : its based on the TextInput and all we have in the sign-in and sign-up files there ; we also have a strategy called "verification code" in sign-up page given to us by CLERK , that we can use to verify an email when signning up.
+
+We can sign up there for now : if we enter a weak password there ; console error will come daying weak passwords and password conditions in console log there.
+
+SO, lets signup there using verification code sent to us > then we can see the homepage there with sign out button too there.
+
+-----------------------------------------------------------------------------------------------
+
+And then we will be able to see the User signed up on Clerk's dashboard > signups > the user signned up info there.
+
+So, we can thus sign in or sogn out there.
+
+----------------------------------------------------------------------------------------------- 
+
+ALso, going through the sign-in , sign-out and other pages are very simple as its just using some states of react to sign in using verification password there > and then if correct > it takes user to home page using router.replace("/") there and so on ....
+
+Same is the sign out page too there , which calls the SignOut button coming from CLERK there.
+
+Also it has a line there : // Redirect to your desired page
+                           Linking.openURL(Linking.createURL('/'))
+
+; so this line is not that important as even if we dont have this line , still it will take us to the sign-in page when we sign-out ; its because in the (auth) folder , we have _layout.jsx file that has :   
+
+if (isSignedIn) {
+    return <Redirect href={'/'} />
+  }
+
+; so it takes user to sign-in page at "/" immediately if the user is not signned in there ; using the Redirect component of expo-router there.
+
+See the next steps in "sign-up.jsx" file now there.
