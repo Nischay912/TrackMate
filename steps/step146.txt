@@ -1,0 +1,39 @@
+Lets setup the authentication using clerk now > clerk.com > visit the dashboard > click on EXPO > copy the code to import the package there : "npm install @clerk/clerk-expo" > in terminal > cd mobile > paste in terminal.
+
+Then get the PUBLIC key and paste in .env file here in "mobile" folder  > can delete from backend folder's .env file as not needed there for now.
+
+------------------------------------------------------------------------------
+
+As per the next steps there in documentation of clerk > we add the following code in _layout.jsx file there -
+
+import { ClerkProvider } from '@clerk/clerk-expo'
+import { Slot } from 'expo-router'
+
+function RootLayoutNav() {
+  return (
+    <ClerkProvider>
+      <Slot />
+    </ClerkProvider>
+  )
+}
+
+; ClerkProvider knows if user is logged in or not as its a component from clerk package that has the session of current logged in user always ; All the screens wrapped inside this box can check the user, log out, or log in.
+
+Slot is like a blank slot or space ; any screen the app wants to show right now will appear here ; its like Placeholder for current active route ; if you navigate to /home, the Home screen will render where <Slot /> is.
+
+Thus ClerkProvider Provides auth context to all screens ; and Slot Displays the current route/screen here.
+
+Example : Navigating to /home → <Home /> renders inside <Slot /> ; Navigating to /profile → <Profile /> renders inside <Slot /> ; thus : All screens have access to Clerk authentication features.
+
+Thus RootLayoutNav is now the main layout of the app that ensures :
+
+- Every screen can access Clerk auth
+- The current session using the login user session's info OR the current screen based on route we are at is displayed via <Slot /> component there now.
+
+Thus Slot has whatever page user is currently in and thus provides Clerk's auth in that page ; thus a logged in user's details are in every page accessible as any page he goes to while logged in , will be accessible here in Slot and its wrapped with ClerkProvider, so : every page will have Clerk's authentication access
+
+In short now : instead of <Stack /> that we had there : This code sets up login/authentication for your app and then displays the current screen inside it.
+
+------------------------------------------------------------------------------
+
+See the next steps in _layout.jsx file now there.
