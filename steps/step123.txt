@@ -1,0 +1,137 @@
+Go in terminal > cd mobile > npx create-expo-app@latest . > putting "." at end makes it to install all the packages in the current selected directory only.
+
+We will thus get a boilerplate expo application using this.
+
+Can now run this on simulator by typing > npx expo > after that press "a" to run on android simulator or scan QR on EXPO mobile app there.
+
+-------------------------------------------------------------------------------------------
+
+NOTE: "To run on mobile ensure that : mobile and laptop are connected with the samwe WIFI."
+
+-------------------------------------------------------------------------------------------
+
+We can see the default boilerplate application of EXPO there which expo pacakge gives us.
+
+We can even edit it by going in > app > tabs > index > changing something and can see it real-time changing in the app as well there.
+
+lets reset the project and get started fresh for now > in terminal type : "npm run reset-project" as we have in-built script this given by EXPO team there under the scripts folder there.
+
+Now it will ask if we want to store this in app-example folder instead of deleting or not ; lets do "Y" for yes for now there.
+
+Can now run : ctrl+shift+P > reload window > to prevent any type error if coming there > then do : npx expo > press "r" to reload the app now with the new updated content after reset we did there.
+
+We'll be using JavaScript in this project and not TypeScript which is the default script EXPO uses and has the file sin .ts only by default.
+
+-------------------------------------------------------------------------------------------
+
+The home page app of the app is in "index.ts" file there.
+
+We can for now edit the text there and see the changes in real-time in our mobile as well there.
+
+-------------------------------------------------------------------------------------------
+
+We can also even update the things there like : in the "style" there -
+
+<View 
+    style = {{
+        flex:1,
+        ..
+        ..
+
+        // can add our styles we want there too like here below.
+        backgroundColor: "green",
+    }}
+>
+
+-------------------------------------------------------------------------------------------
+
+We can even add inline styles there like : <Text style={{ color: "yellow" }}
+
+-------------------------------------------------------------------------------------------
+
+We can also create Links using <Link> : use the Link tag of "expo-router" rather than that of "react-navigation" because : the "expo-router" one is more optimized one.
+
+<Link href={"/about}>About</Link>
+
+And we can create the "About" page in the "app" folder as "about.jsx" file there and get boilerplate of it using "rnfe" command i.e. "react native functional export component" there.
+
+If getting error : make all from ".tsx" to ".jsx" as we will be using JavaScript and not TypeScript here.
+
+-------------------------------------------------------------------------------------------
+
+Now, we see there that the Link is working and we are getting navigated to About page : but during the navigation, the new pages are coming from the right side ; this is called "STACK NAVIGATOR" and the previous pages come from left side ; feels like a Stack : so this happens due to : "<Stack>" that we have put in the root layout i.e. in the "_layout" file in the root directory of "app" folder there : so we always have Stack component in root layout unless we are building a single page mobile application.
+
+-------------------------------------------------------------------------------------------
+
+Now there if we don't want to see the "header" saying name of file "index" there ; then we can just write in _layout.jsx file there that : <Stack screenOptions = {{ headerShown: false }} /> ; but we want to have it in our app currently, so lets not do that there for now.
+
+-------------------------------------------------------------------------------------------
+
+Then we can also have an Image component if we want using Image component, but use the one from expo-image instead of react-native one , as its more optimized one, here -
+
+<Image 
+    source={{uri:"https://i.ytimg.com/vi/dlGnosBTm04/hqdefault.jpg?sqp=-oaymwEnCNACELwBSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLBeqqCo6iulR_UkH5wFD88s01g-Zg"}}
+
+    style={{width: 100, height: 100}}
+/>
+
+-------------------------------------------------------------------------------------------
+
+So, we use "uri" when we want to get a remote image from websites ; but to get a local image from folders of your PC, then we do -
+
+<Image
+    source={require("@/assets/images/react-logo.png")}
+    style={{width:100, height:100}}
+/>
+
+-------------------------------------------------------------------------------------------
+
+We also there see that if we do : <View> hello </View> : will give error : as any text must be wrapped in <Text> component : so we should do : <View> <Text> hello </Text> </View>.
+
+-------------------------------------------------------------------------------------------
+
+We may be thinking that : why are we not doing this <Text> in <Link> then ; its because if we hover over the <Link> there, we can see that : it tells that : they already put the texts we write there under <Text> by default there ; so there is no problem there l but otherwise, we must put the text if any under the <Text> component always there.
+
+-------------------------------------------------------------------------------------------
+
+For styles, we can create a StyleSheet from react-native as shown below -
+
+const styles = StyleSheet.create({
+    container:{
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "magenta",
+    },
+
+    heading:{
+        fontSize: 25,
+        color: "yellow",
+    },
+})
+
+; then we can get the styles from this stylesheet using -
+
+<View style={styles.container}>
+
+.. later : <Text style={styles.heading}> and so on....
+
+; thus stylesheet helps to organize all styles at a single place and also warns if we use wrong style properties, etc : thus is an optimized approach to use it in our app.
+
+-------------------------------------------------------------------------------------------
+
+Now , in the "app.json" file, we have the configurations fro our mobile application. When deploying the app to play store or App store, this is the file we update at that time and work with it that time.
+
+-------------------------------------------------------------------------------------------
+
+If in terminal, we press "w" , then it opens the app in web and thus we can also build a web app using expo ; but for now we will be dealing on mobile app only that we have here.
+
+-------------------------------------------------------------------------------------------
+
+We also have a term called "Tab Navigator" : there we have some tabs on bottom of screen usually, and whenever we click on any one of them the UI will update ; so Tab Navigator is a navigation pattern that craetes a tab bar (usually at the bottom of the screen) : and allows the users to switch between different screens there.
+
+For that we create a (tabs) folder in "app" folder > and then place all the tabs within that folder there ; but we won't be using it in this project for now ; we will stick to the "Stack Navigator" only that we have in _layout.tsx which navigates us to different pages like a stack with new pages coming from right & the previous ones coming from left there.
+
+-------------------------------------------------------------------------------------------
+
+See the next steps in auth.styles.js file now there.
