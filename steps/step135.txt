@@ -1,0 +1,7 @@
+If we for now just put only a single Text line on homepage and give it just one style : flex:1 > and for now get rid of the screenOptions in the _layout.tsx file to not show the navbar with the header for each component there.
+
+Now we will see the text overflowing out of the device screen and not visible there ; its called content is out of SafeAreaView ; user can't see the text there ; the content appears overlapping there with the status bar of mobile i.e. the bar with time battery , etc there.
+
+So, to fix this : we create a safe screen component there.
+
+See the next steps in SafeScreen.jsx file now there.
