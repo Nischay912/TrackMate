@@ -1,0 +1,5 @@
+In server.js file all the routes are related to transactions, so lets create transactionsRoute.js file inside the "routes" folder for it there.
+
+Then create a router there and then cut all the routes from server.js file and paste in that file now there.
+
+see the next steps in transactionsRoute.js file now there.

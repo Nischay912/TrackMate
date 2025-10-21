@@ -3,8 +3,9 @@ import express from "express"
 
 // step10: if we now try to use the environment variables like by doing : "console.log(process.env.PORT)" ; it will show "undefined" because to use the environment variables, we need to use the dotenv package and then run its config function thus here below.
 import dotenv from "dotenv"
-import { sql } from "./config/db.js"
+import { initDB } from "./config/db.js"
 import rateLimiter from "./middleware/rateLimiter.js"
+import transactionsRoute from "./routes/transactionsRoute.js"
 dotenv.config()
 
 const app = express()
@@ -27,6 +28,13 @@ app.use(express.json())
 const PORT = process.env.PORT || 5001
 
 // step18: now lets create a function to initialize the database here below.
+
+// step118: WE CAN SHIFT THE BELOW CODE TO db.js FILE Y=TO KEEP THINGS ORGANIZED NOW HERE BELOW.
+
+// step119: AND THEN IMPORT IT FROM THERE AND CAN USE IT THUS HERE BELOW NOW, THUS HERE NOW BELOW.
+
+// step120: see the next steps in step121.txt file now there.
+/*
 async function initDB() {
     try{
         // step19: we will be using RAW SQL codes for database in this project where we have Tables and all, thus here below.
@@ -60,6 +68,24 @@ async function initDB() {
         process.exit(1)
     }
 }
+*/
+
+// step107: now we see that all the routes had "/api/transactions/"" common in all ; so lets put in common here below and just after that call the transactionsRoute here below.
+
+// step108: so it means now that : “For every route defined inside transactionsRoute, automatically add /api/transactions at the beginning.” ; thus here below.
+
+// step109: thats why we can remove the "/api/transactions/" from the routes there.
+
+// step110: see the next steps in server.js file now there.
+
+// step113: so now this below line means that : if we get a request for a URL strating with "/api/transactions/" then call the transactionsRoute and run the "transactionsRoute" file there and based on other parameters in URL it will run the appropriate routes from there, thus here below.
+
+// step114: example : if request comes for "localhost:5001/api/transactions/123" ; then it will run the transactionsRoute file and based on the parameters in URL it will run the appropriate routes from there ; like here it is "/123" after "/api/transactions/" ; so it will run the "/:userId" route from there ; thus here below.
+
+// step115: can verify by sending a request via POSTMAN to any route and getting correct response there means everything is working correctly as expected now there, hence so now thus here below.
+
+// step116: see the next steps in step117.txt file now there.
+app.use("/api/transactions", transactionsRoute)
 
 // step5: now lets create a route here below for the url ending in "/" here below.
 
@@ -73,6 +99,8 @@ async function initDB() {
 // step40: now lets make a GET request to fetch the transaction using the user_id here below.
 
 // step41: we will have the user_id dynamic in the URL, so we will use a dynamic route here below using ":" thus here below ; example : "localhost:5001/api/transactions/123" ; where "123" is the user_id thus here below.
+
+/* COMMENTED AND SENT TO TRANSACTIONROUTES.JS FILE THERE FOR BETTER ORGANIZED FOLDER STRUCTURES THERE.
 app.get("/api/transactions/:userId", async (req, res) => {
     try{
         console.log(req.params)
@@ -250,6 +278,7 @@ app.get("/api/transactions/summary/:userId" , async(req, res) => {
         })    
     }
 })
+*/
 
 // step25: now lets initialize the database and then run the app.listen function only after the database is initialized successfully thus here below ; else it will exit with process.exit there using the error message thus here below.
 
