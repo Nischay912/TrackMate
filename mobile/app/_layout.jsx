@@ -20,6 +20,7 @@ import { ClerkProvider } from '@clerk/clerk-expo'
 import { Slot } from 'expo-router'
 import SafeScreen from '@/components/SafeScreen'
 import { tokenCache } from '@clerk/clerk-expo/token-cache'
+import { StatusBar } from 'expo-status-bar'
 
 export default function RootLayout() {
   return (
@@ -35,6 +36,15 @@ export default function RootLayout() {
         {/*  SO SLOT RENDERS THE CURRENTLY SELECTED COMPONENT/CONTENT OR THE PAGE WE CURRENTLY ARE AT, THUS HERE BELOW. */}
         <Slot />
       </SafeScreen>
+
+      {/* step372: so now we will show the status bar of the mobile phone too there, i.e. the top bar containing time and battery and all of the phone, thus here below using the StatusBar component of the expo-status-bar & not from react-native as the expo one is far better and more performant , optimized and efficient that the react-native one, thus here below. */}
+
+      {/* step373: and then we can change its style to "dark" as its default color style is "light" but in light its barely visible as per our theme, so better to keep it in "dark" mode style thus here below. */}
+
+      {/* step374: and since this is outside all the folders of "app" , we place this status bar here and not inside (root)'s _layout.jsx ; as then this will apply in entire application ; if we had placed this component in (root)'s layout.jsx file, then this would have been applied to every screen present in that (root) folder only ; but since this is outside all the folders of "app" , the status bar component placed and written here now will be applied in the entire application, thus now here. */}
+
+      {/* step375: FINAL STEP: THUS THE APPLICATION FINALLY GOT COMPLETED THUS HERE BELOW. */}
+      <StatusBar style="dark" />
     </ClerkProvider>
   )
 }

@@ -1,5 +1,6 @@
 import { useCallback, useState } from "react";
 import {Alert} from "react-native";
+import { API_URL } from "../constants/api";
 
 // step192: now lets create a function that can be exported and used in other files if needed, thus here below.
 
@@ -8,7 +9,7 @@ export const useTransactions = (userId) => {
 
     // step198: now lets have a variable directly here, so that we don't have to type this out again and again thus here below.
     // const API_URL = "http://localhost:5001/api";
-    const API_URL = "https://trackmate-api-b2zx.onrender.com/api";
+    // const API_URL = "https://trackmate-api-b2zx.onrender.com/api";
 
     // step194: now lets have the different states that will be used, thus here below.
 
