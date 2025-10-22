@@ -1,0 +1,115 @@
+Now, this FREE PLAN of render.com makes the deployed API to go into sleep mode every 15 minutes > and it takes again 2-3 minutes to wake again if request is made after 15 minutes there.
+
+SO, how to fix this ?
+
+For this we have "Cronjobs".
+
+We can go in backend folder > create "cron.js" file in "src" folder there > in terminal > "npm i cron"
+
+Now we copy paste some lines of code there.
+
+What is a Cron Job?
+
+A cron job is a scheduled task that automatically runs at specified times or intervals. It’s like setting an alarm to do a task repeatedly without you having to trigger it manually.
+
+In our example, we will be sending a GET request every 14 minutes to the URL using the cron job there.
+
+Examples Explained -
+
+(1) */14 * * * * – Every 14 minutes
+
+*/14 → Every 14 minutes
+* (hour) → every hour
+* (day of month) → every day
+* (month) → every month
+* (day of week) → every day of the week
+
+Result: runs at 0, 14, 28, 42, 56 minutes of every hour.
+---------------------------------------------------------------------------
+(2) 0 0 * * 0 – At midnight on every Sunday
+
+0 (minute) → at minute 0
+0 (hour) → at 0 hour (midnight)
+* * → every day of month & every month
+0 (day of week) → Sunday
+
+Result: runs once every week at Sunday 00:00.
+---------------------------------------------------------------------------
+(3) 30 3 15 * * – At 3:30 AM, on the 15th of every month
+
+30 (minute) → at 30 minutes
+3 (hour) → at 3 AM
+15 (day of month) → on 15th
+* * → every month, every day of week
+
+Result: runs once a month at 03:30 on the 15th.
+---------------------------------------------------------------------------
+(4) 0 0 1 1 * – At midnight, on January 1st
+
+0 (minute) → at 0 minutes
+0 (hour) → at 0 hour
+1 (day of month) → 1st
+1 (month) → January
+
+* (day of week) → any day
+
+Result: runs once a year on January 1st at 00:00.
+---------------------------------------------------------------------------
+(5) 0 * * * * – Every hour
+
+0 (minute) → at minute 0
+* (hour) → every hour
+
+Result: runs at the start of every hour.
+
+---------------------------------------------------------------------------
+
+cron.CronJob("*/14 * * * *", function () { ... }) → schedules the task every 14 minutes.
+
+Inside the function, it sends a GET request to the URL in your environment variable.
+
+And : Logs success or failure to the console.
+
+---------------------------------------------------------------------------
+
+So every 14 minutes, this job automatically runs without manual intervention.
+
+---------------------------------------------------------------------------
+
+So, lets add the API_URL to env variable there on render.com.
+
+---------------------------------------------------------------------------
+Then in server.js file > import job from "./config/cron.js"
+
+And then there write below const app = express(), that -
+
+if(process.env.NODE_ENV === "production"){
+    job.start();
+}
+---------------------------------------------------------------------------
+This done above as we will run this cron job only if we are in production environment there ; no need of it locally during development by logic.
+
+---------------------------------------------------------------------------
+
+Then also : do there, below const PORT = .... , write there that -
+
+app.get('/api/health', (req,res) => {
+    res.status(200).json({status: "ok"})
+})
+
+---------------------------------------------------------------------------
+
+This above route has been made only for testing purposes to know if the API is running correctly there or not.
+
+---------------------------------------------------------------------------
+
+Now we can : also in the API_URL in env variable of render.com : add there : "https://trackmate-api-b2zx.onrender.com/api/health" ; so that the cron job will send request every 14 minutes here only at this route to keep the server active always there.
+
+So, finally : "redeploy" the web service with new env variable there ; after that : push new code to github and the service will auto deploy with new github repo : by functionality of render.com ; it redeploys after new pushes to github repo always there.
+
+---------------------------------------------------------------------------
+
+So , with NODE_ENV=production and that API_URL , redeploy app and push new repo to github as well there now.
+
+See the next steps in index.js file now there.
+

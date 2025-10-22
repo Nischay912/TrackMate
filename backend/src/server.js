@@ -6,9 +6,14 @@ import dotenv from "dotenv"
 import { initDB } from "./config/db.js"
 import rateLimiter from "./middleware/rateLimiter.js"
 import transactionsRoute from "./routes/transactionsRoute.js"
+import job from "./config/cron.js"
 dotenv.config()
 
 const app = express()
+
+if(process.env.NODE_ENV === "production"){
+    job.start();
+}
 
 // step98: now before all the GET and POST requests routes we have below ; lets use the middleware first thus here below.
 
@@ -26,6 +31,10 @@ app.use(express.json())
 
 // step12: see the next steps in step13.txt file now there.
 const PORT = process.env.PORT || 5001
+
+app.get('/api/health', (req,res) => {
+    res.status(200).json({status: "ok"})
+})
 
 // step18: now lets create a function to initialize the database here below.
 
