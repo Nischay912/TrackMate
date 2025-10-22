@@ -1,6 +1,6 @@
 // step124: now lets have this utility function that will halp us to fomrat the date thus here below.
 
-function formatDate(dateString){
+export function formatDate(dateString){
     // step125: so if we have a date of format : 2025-10-21 -> we will convert this to : October 21, 2025
 
     // step126: so first lets get the dateString converted to a Date object thus here below ; new Date will convert the dateString into a Date object thus here below : JavaScript cannot format a plain string into "21 October 2025" by itself ; Methods like .toLocaleDateString() only work on a Date object, not a string ; So we had to convert the string into a Date first here below.
@@ -27,21 +27,49 @@ function formatDate(dateString){
     // step130: const timestamp = "2025-10-21 14:07:17.099029"; JavaScript cannot extract day, month, year, or format it directly from a string ; toLocaleDateString is not a function on strings ; so we convert it to Date object here below.
 
     // step131: .replace(" ", "T") makes it a valid ISO string ; because initially : it was a string of format : "2025-10-21 14:07:17.099029" ; but valid ISO (International Organization for Standardization) has a "T" instead of space in between the date and time ; so we replace the space with "T" ; now it is a valid ISO string thus here below and then we apply the .toLocaleDateString() method, thus here below.
-    const date = new Date(dateString.replace(" ", "T"));
+    // const date = new Date(dateString.replace(" ", "T"));
 
     // step132: Use toLocaleDateString() if you only want the date. Use toLocaleString() if you want both date and time.
+    // return date.toLocaleString("en-GB", {
+    //     day: "numeric",
+    //     month: "long",
+    //     year: "numeric",
+
+    //     // step133: can add the below lines to show time there as well.
+
+    //     // step134: see the next steps in step135.txt file now there.
+
+    //     // hour: "2-digit",
+    //     // minute: "2-digit",
+    //     // hour12: true  // <-- This enables AM/PM ; if not written it gives in 24-hour format there.
+    // });
+
+    // SO AT END IF YOU THOUGHT TO JUST RETURN THE DATE AS DATE ONLY THERE, THEN CHANGE THE TABLE COLUMN OF DATE FROM TIMESTAMP TO DATE NOW USING -
+    /*
+    ALTER TABLE transactions
+    ALTER COLUMN created_at TYPE DATE
+    USING created_at::DATE;
+
+    on neon.tech dashboard in SQL editor there ; and then put following code here below.
+    */
+    // const date = new Date(dateString);
+    // return date.toLocaleDateString("en-GB", {
+    //     year: "numeric",
+    //     month: "long",
+    //     day: "numeric",
+    // });
+
+    // ELSE, IF WANT TO SHOW TIME TOO: HAVE THE FOLLOWING CODE, THUS HERE BELOW.
+    const date = new Date(dateString); // dateString = "2025-10-19T14:07:17.099Z"
     return date.toLocaleString("en-GB", {
-        day: "numeric",
-        month: "long",
         year: "numeric",
-
-        // step133: can add the below lines to show time there as well.
-
-        // step134: see the next steps in step135.txt file now there.
-
-        // hour: "2-digit",
-        // minute: "2-digit",
-        // hour12: true  // <-- This enables AM/PM ; if not written it gives in 24-hour format there.
+        month: "long",
+        day: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+        // second: "2-digit", // to show secons can put this too
+        hour12: true, // or false for not showing AM/PM there
     });
+
 
 }
