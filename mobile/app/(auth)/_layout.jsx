@@ -8,5 +8,6 @@ export default function AuthRoutesLayout() {
     return <Redirect href={'/'} />
   }
 
-  return <Stack />
+  // THE SCREENOPTIONS WITH HEADERSHOWN AS FALSE, MAKES THE HEADER OF EACH PAGE TO BE HIDDEN IN THE UI , LIKE THE TOP SHOWING SIGN-IN OR SIGN-UP THERE WILL NOT BE SHOWN NOW, THUS HERE BELOW.
+  return <Stack screenOptions={{headerShown: false}} />
 }

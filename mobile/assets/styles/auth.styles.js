@@ -15,7 +15,8 @@ export const styles = StyleSheet.create({
 
   // Illustration (image) shown at the top of the auth screen.
   illustration: {
-    width: "100%", // Make the image as wide as the parent container so it scales across device widths.
+    // width: "100%", // Make the image as wide as the parent container so it scales across device widths ; maintaing its proportions because of "contain" class used here too below.
+    width: 300, // Make the image as wide as the parent container so it scales across device widths.
     height: 310, // Fixed height to control visual layout and keep the image proportionate on most screens.
     resizeMode: "contain", // Ensures the full image is visible without distortion; it fits within the width/height while preserving aspect ratio.
   },

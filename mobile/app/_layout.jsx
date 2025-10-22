@@ -31,6 +31,8 @@ export default function RootLayout() {
       <SafeScreen>
 
         {/* step148: thus Slot has whatever page user is currently in and thus provides Clerk's auth in that page ; thus a logged in user's details are in every page accessible as any page he goes to while logged in , will be accessible here in Slot and its wrapped with ClerkProvider, so : every page will have Clerk's authentication access, thus here below. */}
+
+        {/*  SO SLOT RENDERS THE CURRENTLY SELECTED COMPONENT/CONTENT OR THE PAGE WE CURRENTLY ARE AT, THUS HERE BELOW. */}
         <Slot />
       </SafeScreen>
     </ClerkProvider>
