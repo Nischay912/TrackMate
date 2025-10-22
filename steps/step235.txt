@@ -111,5 +111,7 @@ So, finally : "redeploy" the web service with new env variable there ; after tha
 
 So , with NODE_ENV=production and that API_URL , redeploy app and push new repo to github as well there now.
 
+We can now on https://trackmate-api-b2zx.onrender.com/api/health this website at endpoint "/api/health" see the response of status: ok > every 14 minutes there, thus it keeps our web service active throughout even if render's free plan sleeps it if no request made for 15 minutes ; but now cronjob makes a request every 14 minutes , thus keeping the website always active there now.
+
 See the next steps in index.js file now there.
 
