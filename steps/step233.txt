@@ -1,0 +1,25 @@
+Now we may be seeing error in our mobile, when we scan QR code and login, we will be seeing "NETWORK REQUEST FAILED" error in our mobile there.
+
+Its because, we are trying to call the localhost:5001 from our local device there ; because in useTransactions.js file we have API_URL as : localhost:5001 there ; but we can't make a call to localhost of our PC from a physical device like mobile phones ; because localhost is the laptop, it can't connect to it , like that ; phone thinks its making calls to the backend of phone there and gets error.
+
+It may work correctly on simulator as localhost for simulator is same as PC as its running on PC only itself ; but on physical device, localhost means the device itself there ; but the backend is not running there ; backend is running on laptop.
+
+So, to fix this we need to take our whole API and deploy it to the cloud.
+
+-----------------------------------------------------------------------------------------
+
+First lets push only the backend part to github seperately there as we don't want the frontend to be deployed ; only API has to be deployed ; so do > cd backend > git init > ... so on > can even do this by copying the backend folder in a new folder and push to github there as trackmate-api
+
+Go on redner.com > dashboard > deploy a web service > select the trackmate-api repo > paste the environment variables there > select free plan > build command : npm install > so that it will take package.json and install node modules.
+
+Then : start command > npm run start > deploy the web service > copy the url from there : "https://trackmate-api-b2zx.onrender.com" > paste this as API_URL in useTransactions.js file there.
+
+-----------------------------------------------------------------------------------------
+
+SO, backend has been deployed now : so no need to now do : cd backend > npm run start > we can do it however IF YOUR BACKEND DEPLOYED APP MAY RUN INTO SLEEP SOMETIMES THERE > THEN DOING "npm run start" here will give correct result in simulator with localhost:5001 as PI_URL there, as both pc and simulator are on same localhost, so no problem will occur due to it, thus there now.
+
+Problem only was with physical device that didn't had backend on its localhost i.e. the mobile ; so it can't access localhost of pc directly there ; thats why deployed backend now can be accessed from any device from there now.
+
+-----------------------------------------------------------------------------------------
+
+See the next steps in step234.txt file now there.
