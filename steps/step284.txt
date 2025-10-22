@@ -1,0 +1,3 @@
+Now, we see that whenevr we reload or refresh the app , it for some seconds show the login page ; and then redirects to home page using the credentials we had logged in there , before refreshing the app.
+
+To fix this, see the next steps in the _layout.jsx file of (root) folder, now there.
