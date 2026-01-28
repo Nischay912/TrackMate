@@ -27,8 +27,14 @@ if(process.env.NODE_ENV === "production"){
 // step99: so now before calling any of the roites here below ; this middleware will be used first to check for rate limiting and if success there ; then it calls safely the next() i..e the functions written after this OR below this middleware calling line, thus here below.
 
 // step100: see the next steps in step101.txt file now there.
-if (process.env.NODE_ENV === "production") {
-    app.use(rateLimiter);
+// app.use(rateLimiter);
+
+if (
+  process.env.NODE_ENV === "production" &&
+  process.env.UPSTASH_REDIS_REST_URL &&
+  process.env.UPSTASH_REDIS_REST_TOKEN
+) {
+  app.use(rateLimiter);
 }
 
 // step30: to use the req.body , we need to have the body-parser middleware thus here below.
