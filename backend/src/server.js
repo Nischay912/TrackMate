@@ -3,13 +3,20 @@ import express from "express"
 
 // step10: if we now try to use the environment variables like by doing : "console.log(process.env.PORT)" ; it will show "undefined" because to use the environment variables, we need to use the dotenv package and then run its config function thus here below.
 import dotenv from "dotenv"
+import cors from "cors"
 import { initDB } from "./config/db.js"
 import rateLimiter from "./middleware/rateLimiter.js"
 import transactionsRoute from "./routes/transactionsRoute.js"
 import job from "./config/cron.js"
+
 dotenv.config()
 
 const app = express()
+
+app.use(cors({
+    origin: "http://localhost:8081",
+    credentials: true,
+}));
 
 if(process.env.NODE_ENV === "production"){
     job.start();
@@ -20,7 +27,9 @@ if(process.env.NODE_ENV === "production"){
 // step99: so now before calling any of the roites here below ; this middleware will be used first to check for rate limiting and if success there ; then it calls safely the next() i..e the functions written after this OR below this middleware calling line, thus here below.
 
 // step100: see the next steps in step101.txt file now there.
-app.use(rateLimiter)
+if (process.env.NODE_ENV === "production") {
+    app.use(rateLimiter);
+}
 
 // step30: to use the req.body , we need to have the body-parser middleware thus here below.
 

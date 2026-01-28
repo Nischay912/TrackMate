@@ -103,7 +103,7 @@ This above route has been made only for testing purposes to know if the API is r
 
 ---------------------------------------------------------------------------
 
-Now we can : also in the API_URL in env variable of render.com : add there : "https://trackmate-api-b2zx.onrender.com/api/health" ; so that the cron job will send request every 14 minutes here only at this route to keep the server active always there.
+Now we can : also in the API_URL in env variable of render.com : add there : "https://trackmate-api-do1y.onrender.com/api/health" ; so that the cron job will send request every 14 minutes here only at this route to keep the server active always there.
 
 So, finally : "redeploy" the web service with new env variable there ; after that : push new code to github and the service will auto deploy with new github repo : by functionality of render.com ; it redeploys after new pushes to github repo always there.
 
@@ -111,7 +111,7 @@ So, finally : "redeploy" the web service with new env variable there ; after tha
 
 So , with NODE_ENV=production and that API_URL , redeploy app and push new repo to github as well there now.
 
-We can now on https://trackmate-api-b2zx.onrender.com/api/health this website at endpoint "/api/health" see the response of status: ok > every 14 minutes there, thus it keeps our web service active throughout even if render's free plan sleeps it if no request made for 15 minutes ; but now cronjob makes a request every 14 minutes , thus keeping the website always active there now.
+We can now on https://trackmate-api-do1y.onrender.com/api/health this website at endpoint "/api/health" see the response of status: ok > every 14 minutes there, thus it keeps our web service active throughout even if render's free plan sleeps it if no request made for 15 minutes ; but now cronjob makes a request every 14 minutes , thus keeping the website always active there now.
 
 WE CAN SEE THE LOGS ON DASHBOARD OF RENDER.COM TOO ANYTIME THAT IT SENDS GET REQUEST AFTER EVERY 14 MINUTES TO THAT API, KEEPING IT ACTIVE ALL THE TIME, THUS HERE BELOW.
 

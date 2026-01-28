@@ -12,7 +12,7 @@ First lets push only the backend part to github seperately there as we don't wan
 
 Go on redner.com > dashboard > deploy a web service > select the trackmate-api repo > paste the environment variables there > select free plan > build command : npm install > so that it will take package.json and install node modules.
 
-Then : start command > npm run start > deploy the web service > copy the url from there : "https://trackmate-api-b2zx.onrender.com" > paste this as API_URL in useTransactions.js file there.
+Then : start command > npm run start > deploy the web service > copy the url from there : "https://trackmate-api-do1y.onrender.com" > paste this as API_URL in useTransactions.js file there.
 
 -----------------------------------------------------------------------------------------
 
