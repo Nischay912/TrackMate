@@ -15,7 +15,7 @@ Trackmate helps users manage income, expenses, and balances seamlessly across iO
 
   <img src="mobile/assets/screenshots/signup.png" width="260"/>
   <img src="mobile/assets/screenshots/add_expenses.png" width="260"/>
-  <img src="mobile/assets/screenshots/shoe_expenses.png" width="260"/>
+  <img src="mobile/assets/screenshots/show_expenses.png" width="260"/>
 </p>
 
 ---
