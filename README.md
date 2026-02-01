@@ -6,6 +6,22 @@ Trackmate helps users manage income, expenses, and balances seamlessly across iO
 
 ---
 
+## 📸 App Screenshots
+
+<p align="center">
+  <b>Sign Up</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <b>Login</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <b>Add Expense</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <b>Dashboard</b><br/><br/>
+
+  <img src="mobile/assets/screenshots/signup.png" width="220"/>
+  <img src="mobile/assets/screenshots/login.png" width="220"/>
+  <img src="mobile/assets/screenshots/add_expenses.png" width="220"/>
+  <img src="mobile/assets/screenshots/show_expenses.png" width="220"/>
+</p>
+
+---
+
 ## ✨ Features
 
 🔐 Secure Authentication: Clerk email verification with 6-digit OTP  
