@@ -23,18 +23,6 @@ Trackmate helps users manage income, expenses, and balances seamlessly across iO
 
 ---
 
-## 🧠 What You’ll Learn
-
-⚙️ Build and deploy an Express REST API  
-🔐 Implement authentication with Clerk  
-📲 Develop mobile apps using React Native + Expo  
-🧵 Manage navigation & state  
-🗄️ Use PostgreSQL with Neon  
-🛡️ Apply Redis rate limiting  
-🚀 Deploy full-stack apps to the cloud  
-
----
-
 ## 🛠️ Tech Stack
 
 | Technology | Purpose |
