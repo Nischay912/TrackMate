@@ -1,50 +1,180 @@
-# Welcome to your Expo app 👋
+# 📊 Trackmate - Full-Stack Expense & Finance Tracker
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A modern, full-stack mobile finance tracking application built with React Native, Expo, Express, and JavaScript, featuring secure authentication, real-time transaction updates, cloud storage, and a powerful backend powered by PostgreSQL (Neon).
 
-## Get started
+Trackmate helps users manage income, expenses, and balances seamlessly across iOS and Android — all using JavaScript with no native Swift or Kotlin required.
 
-1. Install dependencies
+---
 
-   ```bash
-   npm install
-   ```
+## ✨ Features
 
-2. Start the app
+🔐 Secure Authentication: Clerk email verification with 6-digit OTP  
+📝 Signup & Login Flows: Passwordless email-based login  
+🏠 Dashboard: View current balance and past transactions  
+➕ Add Transactions: Create income or expense entries  
+🗑️ Delete Transactions: Instantly updates balance  
+🔄 Pull-to-Refresh: Manual refresh support  
+🚪 Logout Support: Secure session handling  
+☁️ Cloud Storage: Persistent database with Neon PostgreSQL  
+📱 Cross Platform: Works on iOS & Android (simulator + real device)  
+⚡ Full-Stack: Mobile app + Express backend  
+🛡️ Rate Limiting: API protection using Redis  
+🎨 Clean UI: Modern responsive mobile-first design  
 
-   ```bash
-   npx expo start
-   ```
+---
 
-In the output, you'll find options to open the app in a
+## 🧠 What You’ll Learn
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+⚙️ Build and deploy an Express REST API  
+🔐 Implement authentication with Clerk  
+📲 Develop mobile apps using React Native + Expo  
+🧵 Manage navigation & state  
+🗄️ Use PostgreSQL with Neon  
+🛡️ Apply Redis rate limiting  
+🚀 Deploy full-stack apps to the cloud  
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+---
 
-## Get a fresh project
+## 🛠️ Tech Stack
 
-When you're ready, run:
+| Technology | Purpose |
+|-----------|---------|
+| React Native | Mobile development |
+| Expo | App build & testing |
+| JavaScript | Core programming language |
+| Expo Router | Navigation |
+| Clerk | Authentication & email verification |
+| Express.js | Backend REST API |
+| Neon PostgreSQL | Cloud database |
+| Redis (Upstash) | Rate limiting |
+| Node.js | Backend runtime |
+| SecureStore | Secure token storage |
 
-```bash
-npm run reset-project
+---
+
+## 📂 Project Structure
+
+```
+Trackmate/
+    mobile/
+        app/
+        components/
+        screens/
+        hooks/
+        assets/
+        package.json
+
+    backend/
+        src/
+            routes/
+            controllers/
+            middleware/
+            server.js
+        package.json
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+---
 
-## Learn more
+## ⚙️ Environment Variables
 
-To learn more about developing your project with Expo, look at the following resources:
+### 📱 Mobile (.env)
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+```
+EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY=your_clerk_key
+EXPO_PUBLIC_API_URL=http://localhost:5000
+```
 
-## Join the community
+---
 
-Join our community of developers creating universal apps.
+### 🖥️ Backend (.env)
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+```
+PORT=5000
+
+DATABASE_URL=your_neon_database_url
+
+CLERK_SECRET_KEY=your_clerk_secret_key
+
+UPSTASH_REDIS_REST_URL=your_redis_url
+UPSTASH_REDIS_REST_TOKEN=your_redis_token
+```
+
+---
+
+## 🚀 Getting Started
+
+### 1️⃣ Backend Setup
+
+```
+cd backend
+npm install
+npm run dev
+```
+
+Runs server on:
+```
+http://localhost:5000
+```
+
+---
+
+### 2️⃣ Mobile Setup
+
+```
+cd mobile
+npm install
+npx expo start
+```
+
+Press:
+- A → Android
+- I → iOS
+- W → Web
+
+---
+
+## 📡 API Endpoints
+
+### Auth
+POST /api/auth/verify
+
+### Transactions
+GET /api/transactions  
+POST /api/transactions  
+DELETE /api/transactions/:id  
+
+---
+
+## 🔒 Security Features
+
+✅ Clerk authentication  
+✅ Email verification  
+✅ Secure token storage  
+✅ Redis rate limiting  
+✅ CORS protection  
+✅ Environment variable isolation  
+
+---
+
+## 📦 Deployment
+
+### Backend
+- Render / Railway / Fly.io
+
+### Mobile
+```
+npx expo build
+```
+
+---
+
+## 👨‍💻 Author
+
+**Nischay Kumar**  
+Full-Stack & React Native Developer
+
+---
+
+## ⭐ Support
+
+If you like this project, give it a ⭐ on GitHub!
