@@ -1,1 +1,5 @@
 Error coming as UPSTASH BECOMES INACTIVE, so deploy without upstash env varibales on render, then works fine there, thus here below.
+
+Error came later as on upstash.com -> it was deleted, so we do -> create new -> save 
+
+Then go back on deleted database there on redis, and click restore and sync data from deleted one, so that data is not lost now there
